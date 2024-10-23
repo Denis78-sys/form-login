@@ -1,29 +1,28 @@
 <template>
-  <div class="register-page">
-    <h2>Registro de usuários</h2>
-    <form @submit.prevent="onSubmit">
-      <div>
-        <label>Name</label>
-        <input v-model="name" type="text" required />
-      </div>
-      <div>
-        <label>Email</label>
-        <input v-model="email" type="email" required />
-      </div>
-      <div>
-        <label>Password</label>
-        <input v-model="password" type="password" required />
-      </div>
-      <button type="submit">Cadastrar</button>
-    </form>
-    <p>
-      Já tem uma conta? <nuxt-link to="/login">Login aqui</nuxt-link>
-    </p>
+  <div>
+    <div class="register-page">
+      <h2>Registro de usuários</h2>
+      <form @submit.prevent="onSubmit">
+        <div>
+          <label>Name</label>
+          <input v-model="name" type="text" required />
+        </div>
+        <div>
+          <label>Email</label>
+          <input v-model="email" type="email" required />
+        </div>
+        <div>
+          <label>Password</label>
+          <input v-model="password" type="password" required />
+        </div>
+        <button type="submit">Cadastrar</button>
+      </form>
+      <p>Já tem uma conta? <nuxt-link to="/login">Login aqui</nuxt-link></p>
+    </div>
+    <Rodape/>
   </div>
-
 </template>
 <script>
-
 export default {
   data() {
     return {
@@ -40,7 +39,7 @@ export default {
           email: this.email,
           password: this.password,
         });
-        alert('Usuário registrado com sucesso!')
+        alert("Usuário registrado com sucesso!");
         this.$router.push("/login");
       } catch (error) {
         alert("Registration failed");
@@ -58,6 +57,7 @@ export default {
   margin: auto;
   padding: 20px;
   border-radius: 10px;
+  margin-top: 10%;
 }
 input {
   width: 100%;

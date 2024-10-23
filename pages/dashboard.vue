@@ -1,18 +1,21 @@
 <template>
-  <div class="dashboard">
-    <div class="cabecalho">
-      <h1>Bem vindo ao seu Dashboard</h1>
-      <button class="botao" @click="handleLogout">Logout</button>
-    </div>
-    <div class="informacoes">
-      <h2>Usuários</h2>
-      <div class="dados">
-        <span v-for="usuario in usuarios" :key="usuario.id">
-          <strong>Nome:</strong> {{ usuario.name }} <br />
-          <strong>E-mail:</strong> {{ usuario.email }} <br /><br />
-        </span>
+  <div>
+    <div class="dashboard">
+      <div class="cabecalho">
+        <h1>Bem vindo ao seu Dashboard</h1>
+        <button class="botao" @click="handleLogout">Logout</button>
+      </div>
+      <div class="informacoes">
+        <h2>Usuários</h2>
+        <div class="dados">
+          <span v-for="usuario in usuarios" :key="usuario.id">
+            <strong>Nome:</strong> {{ usuario.name }} <br />
+            <strong>E-mail:</strong> {{ usuario.email }} <br /><br />
+          </span>
+        </div>
       </div>
     </div>
+    <Rodape/>
   </div>
 </template>
 
@@ -24,13 +27,13 @@ export default {
   computed: {
     // Mapear o getter corretamente para acessar os usuários
     ...mapGetters({
-      usuarios: 'todo' // O nome 'usuarios' será usado no template para referenciar o getter 'todo'
+      usuarios: "todo", // O nome 'usuarios' será usado no template para referenciar o getter 'todo'
     }),
   },
   methods: {
     ...mapActions({
-      carregarDados: 'carregarDados', // Mapeia a action carregarDados
-      logout: 'auth/logout' // Se 'auth' for um módulo com namespace
+      carregarDados: "carregarDados", // Mapeia a action carregarDados
+      logout: "auth/logout", // Se 'auth' for um módulo com namespace
     }),
     handleLogout() {
       this.logout(); // Chama a ação do Vuex para logout

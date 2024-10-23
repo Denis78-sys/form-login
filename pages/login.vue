@@ -1,33 +1,34 @@
 <template>
-  <div class="login-page">
-    <div class="form">
-      <h2>Login</h2>
-      <form @submit.prevent="onSubmit">
-        <div>
-          <label>Email</label>
-          <input v-model="email" type="email" required />
-        </div>
-        <div>
-          <label>Password</label>
-          <input v-model="password" type="password" required />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-      <p>
-        Não tem uma conta?
-        <nuxt-link to="/register">Registre-se aqui</nuxt-link>
-      </p>
+  <div>
+    <h1>System DM</h1>
+    <div class="login-page">
+      <div class="form">
+        <h2>Login</h2>
+        <form @submit.prevent="onSubmit">
+          <div>
+            <label>Email</label>
+            <input v-model="email" type="email" required />
+          </div>
+          <div>
+            <label>Password</label>
+            <input v-model="password" type="password" required />
+          </div>
+          <button type="submit">Login</button>
+        </form>
+        <p>
+          Não tem uma conta?
+          <nuxt-link to="/register">Registre-se aqui</nuxt-link>
+        </p>
+      </div>
     </div>
-    
+    <Rodape />
   </div>
 </template>
 
 <script>
-import { mapActions} from "vuex";
+import { mapActions } from "vuex";
 
 export default {
-
-
   data() {
     return {
       email: "",
@@ -35,12 +36,11 @@ export default {
     };
   },
   methods: {
-    ...mapActions('auth', ['login']),
+    ...mapActions("auth", ["login"]),
     async onSubmit() {
       try {
         await this.login({ email: this.email, password: this.password });
         this.$router.push("/dashboard");
-        
       } catch (error) {
         alert("Login failed");
       }
@@ -50,12 +50,16 @@ export default {
 </script>
 
 <style scoped>
+h1{
+  text-align: center;
+}
 .login-page {
   background-color: beige;
   max-width: 400px;
   margin: auto;
   padding: 20px;
   border-radius: 10px;
+  margin-top: 10%;
 }
 
 .form {
