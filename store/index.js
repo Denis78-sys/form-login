@@ -1,27 +1,40 @@
-/* 
-export const state = () =>({
-    usuarios: []
-})
+export const namespaced = true;
 
-//GETTERS
+export const state = () => ({
+  usuarios: []
+});
+
 export const getters = {
-    todo: (state) => state.usuarios
-}
-//ACTIONS
+  todo(state) {
+    return state.usuarios; // Acessa a lista de usuários
+  }
+};
+
 export const actions = {
-    async carregarDados({ commit }) {
-        try {
-            const response = await this.$axios.get('/usuarios');
-            commit('SET_USUARIOS', response.data); // Passa apenas os dados
-            console.log(response.data);
-        } catch (error) {
-            console.error(error);
+  async carregarDados({ commit, rootState }) {
+    try {
+      // Acessa o token do módulo 'auth' usando rootState
+      const token = rootState.auth.token; 
+
+      if (!token) {
+        throw new Error("Token não encontrado!");
+      }
+
+      const response = await this.$axios.get('/usuarios'/* , {
+        headers: {
+          authorization: `Bearer ${token}`,
         }
+      } */);
+
+      commit('SET_USUARIOS', response.data); // Passa os dados da resposta para a mutação
+    } catch (error) {
+      console.error("Erro ao carregar dados: ", error);
     }
-}
-//MUTATIONS
+  }
+};
+
 export const mutations = {
-    SET_USUARIOS(state, usuarios){
-        state.usuarios = usuarios // Aqui, precisa ser os dados reais, não o objeto completo de resposta
-    }
-} */
+  SET_USUARIOS(state, usuarios) {
+    state.usuarios = usuarios; // Atualiza o estado com a lista de usuários
+  }
+};
