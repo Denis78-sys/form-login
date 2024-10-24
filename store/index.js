@@ -14,19 +14,21 @@ export const actions = {
   async carregarDados({ commit, rootState }) {
     try {
       // Acessa o token do módulo 'auth' usando rootState
-      const token = rootState.auth.token; 
+      const token = rootState.auth.token;
 
       if (!token) {
         throw new Error("Token não encontrado!");
       }
 
-      const response = await this.$axios.get('/usuarios'/* , {
+      // Faz a requisição para buscar os usuários, passando o token no cabeçalho
+      const response = await this.$axios.get('/listar-usuarios', {
         headers: {
-          authorization: `Bearer ${token}`,
+          authorization: `Bearer ${token}`, // Inclui o token no cabeçalho
         }
-      } */);
+      });
 
-      commit('SET_USUARIOS', response.data); // Passa os dados da resposta para a mutação
+      // Comita a mutação para atualizar a lista de usuários no estado
+      commit('SET_USUARIOS', response.data);
     } catch (error) {
       console.error("Erro ao carregar dados: ", error);
     }
