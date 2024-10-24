@@ -2,7 +2,7 @@
   <div class="rodape">
     <footer>
       <span
-        >Desenvolvido por <a href="#"><strong>Denis Marques</strong></a></span
+        >Desenvolvido por <a href="https://www.linkedin.com/in/denis-marques-771255105/" target="_blank"><strong>Denis Marques</strong></a></span
       >
     </footer>
   </div>
