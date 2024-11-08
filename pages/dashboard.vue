@@ -26,15 +26,13 @@ export default {
   middleware: "auth",
   computed: {
     // Mapear o getter corretamente para acessar os usuários
-    ...mapGetters({
-      usuarios: "todo", // O nome 'usuarios' será usado no template para referenciar o getter 'todo'
-    }),
+    ...mapGetters('auth', ['getUsuarios']), // Mapeia o getter 'todo' do módulo 'usuarios'
+    usuarios() {
+      return this.getUsuarios; // Retorna a lista de usuários
+    }
   },
   methods: {
-    ...mapActions({
-      carregarDados: "carregarDados", // Mapeia a action carregarDados
-      logout: "auth/logout", // Se 'auth' for um módulo com namespace
-    }),
+    ...mapActions('auth', ['logout', 'carregarDados']),
     handleLogout() {
       this.logout(); // Chama a ação do Vuex para logout
       this.$router.push("/login"); // Redireciona para login
